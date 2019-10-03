@@ -40,6 +40,7 @@ render() {
             {this.renderSquare("5")}
             {this.renderSquare("6")}
             {this.renderSquare("x")}
+            {/* {this.renderSquare("ln")} */}
         </div>
         <div className="row">
             {this.renderSquare("1")}
