@@ -142,6 +142,16 @@ class Calculator extends React.Component {
             replaceScreen: true
         });
     }
+
+    percent(value, calculation, saved, replaceScreen){
+        var answer = 0.01*(parseFloat(value));
+        this.setState({
+            value: answer,
+            calculation: "none",
+            saved: 0,
+            replaceScreen: true
+        });
+    }
   
     handleClick(i) {
         const value = this.state.value;
@@ -166,15 +176,26 @@ class Calculator extends React.Component {
                     replaceScreen: true
                 });
             }
+            // change signs
+            if(i == "±"){
+                this.setState({
+                    value: -1*value,
+                    calculation: calculation,
+                    saved: saved,
+                    replaceScreen: false
+                });
+            }
             // delete
-            else if(i == "<-"){ this.delete(value, calculation, saved, replaceScreen); }
+            else if(i == "del"){ this.delete(value, calculation, saved, replaceScreen); }
             // sqrt
             else if(i == "√"){ this.sqrt(value, calculation, saved, replaceScreen); }
             // factorial
             else if(i == "!"){ this.factorial(value, calculation, saved, replaceScreen); }
+            // percent
+            else if(i == "%"){ this.percent(value, calculation, saved, replaceScreen); }
             // else perform operations
             else{
-                // if you have an operator, remember and store prev value
+                // if you have an operator, save and store prev value
                 if(operators.includes(i)){
                     this.setState({
                         calculation: i,
